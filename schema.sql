@@ -1,6 +1,7 @@
 -- Schema for KZ Project
 -- Generated based on diccionario_datos.txt
 -- Normalization Level: 3NF
+-- Part of Project Schedule Phase 1
 
 DROP TABLE IF EXISTS detalle_ventas CASCADE;
 DROP TABLE IF EXISTS deliveries CASCADE;
