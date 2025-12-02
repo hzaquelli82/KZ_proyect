@@ -1,0 +1,91 @@
+erDiagram
+    UBICACIONES {
+        int id_ubicacion PK
+        string departamento
+        string provincia
+        string distrito
+    }
+
+    CLIENTES {
+        int id_cliente PK
+        string nombre_completo
+        string dni
+        string correo
+        int id_ubicacion FK
+    }
+
+    CATEGORIAS {
+        int id_categoria PK
+        string nombre
+    }
+
+    SUB_CATEGORIAS {
+        int id_sub_categoria PK
+        int id_categoria FK
+        string nombre
+    }
+
+    MARCAS {
+        int id_marca PK
+        string nombre
+    }
+
+    PRODUCTOS {
+        int id_producto PK
+        string sku
+        string nombre
+        int id_marca FK
+        int id_sub_categoria FK
+        decimal precio_venta_base
+    }
+
+    VENTAS {
+        int id_venta PK
+        int id_cliente FK
+        date fecha_entrega
+        string estado_pago
+    }
+
+    DETALLE_VENTAS {
+        int id_detalle PK
+        int id_venta FK
+        int id_producto FK
+        int cantidad
+        decimal precio_unitario
+    }
+
+    EMPRESAS_DELIVERY {
+        int id_empresa_delivery PK
+        string nombre
+    }
+
+    DELIVERIES {
+        int id_delivery PK
+        int id_venta FK
+        int id_empresa_delivery FK
+        int id_ubicacion FK
+        decimal costo_delivery
+    }
+
+    PROVEEDORES {
+        int id_proveedor PK
+        string nombre
+    }
+
+    GASTOS {
+        int id_gasto PK
+        int id_proveedor FK
+        decimal monto_total
+    }
+
+    CLIENTES }|--|| UBICACIONES : "resides in"
+    SUB_CATEGORIAS }|--|| CATEGORIAS : "belongs to"
+    PRODUCTOS }|--|| MARCAS : "branded as"
+    PRODUCTOS }|--|| SUB_CATEGORIAS : "categorized as"
+    VENTAS }|--|| CLIENTES : "purchased by"
+    DETALLE_VENTAS }|--|| VENTAS : "part of"
+    DETALLE_VENTAS }|--|| PRODUCTOS : "contains"
+    DELIVERIES }|--|| VENTAS : "ships"
+    DELIVERIES }|--|| EMPRESAS_DELIVERY : "handled by"
+    DELIVERIES }|--|| UBICACIONES : "delivered to"
+    GASTOS }|--|| PROVEEDORES : "incurred from"
