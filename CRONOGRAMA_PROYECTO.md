@@ -9,7 +9,7 @@ El objetivo de esta semana es establecer los cimientos del proyecto y asegurar q
 *   **Día 1: Configuración del Entorno y Base de Datos Local**
     *   Instalar Python, PostgreSQL y herramientas de administración (pgAdmin o DBeaver).
     *   Crear un entorno virtual de Python (`venv`) e instalar librerías (`pandas`, `sqlalchemy`, `psycopg2`, `openpyxl`).
-    *   Inicializar la base de datos local `kz_project`.
+    *   Inicializar la base de datos local `KomaZanoTest`.
     *   Ejecutar el script `schema.sql` para crear las tablas.
     *   *Entregable:* Base de datos vacía funcionando localmente.
 
