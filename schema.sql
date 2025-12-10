@@ -1,6 +1,7 @@
 -- Schema for KZ Project
 -- Generated based on diccionario_datos.txt
 -- Normalization Level: 3NF
+-- Part of Project Schedule Phase 1
 
 DROP TABLE IF EXISTS detalle_ventas CASCADE;
 DROP TABLE IF EXISTS deliveries CASCADE;
@@ -153,4 +154,27 @@ CREATE TABLE gastos (
     numero_factura VARCHAR(50),
     fecha_factura DATE,
     estado_pago VARCHAR(50)
+);
+
+-- 12. Compras (Header - Inventory Replenishment)
+CREATE TABLE compras (
+    id_compra SERIAL PRIMARY KEY,
+    id_proveedor INTEGER REFERENCES proveedores(id_proveedor),
+    fecha_compra DATE,
+    fecha_recepcion DATE,
+    numero_factura VARCHAR(50),
+    tipo_comprobante VARCHAR(50),
+    monto_total DECIMAL(10,2),
+    estado VARCHAR(50) DEFAULT 'Recibido',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 13. Detalle Compras (Items)
+CREATE TABLE detalle_compras (
+    id_detalle_compra SERIAL PRIMARY KEY,
+    id_compra INTEGER REFERENCES compras(id_compra),
+    id_producto INTEGER REFERENCES productos(id_producto),
+    cantidad INTEGER NOT NULL,
+    costo_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) GENERATED ALWAYS AS (cantidad * costo_unitario) STORED
 );
